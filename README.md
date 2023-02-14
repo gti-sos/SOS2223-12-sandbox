@@ -5,14 +5,10 @@ prueba victor
 
 prueba para el feedback del 20 de febrero
 <p><li><strong>Team:</strong>
-        <li>
             [Álvaro Maraver Lerma](https://github.com/AlvaroMaraverLerma)
-        </li>
-        <li><strong>Proyect Description:</strong>
+        <strong>Project description:</strong>
             Our proyect...
-        </li>
-        <li><strong>Repository:</strong>
+        <strong>Repository:</strong>
             ....
-        </li>
     </li>
 </p>
