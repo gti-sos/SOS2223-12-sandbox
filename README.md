@@ -4,5 +4,7 @@ prueba victor
 
 
 prueba para el feedback del 20 de febrero
-<p><lo><strong>Team:</strong>
-    <lo href="https://github.com/AlvaroMaraverLerma">Álvaro Maraver Lerma</lo></lo></p>
+<p><li><strong>Team:</strong>
+    <li href="https://github.com/AlvaroMaraverLerma">Álvaro Maraver Lerma</li>
+    </li>
+</p>
