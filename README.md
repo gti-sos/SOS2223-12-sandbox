@@ -1,3 +1,3 @@
 # SOS2223-12-sandbox
 
-Pruebas JS en el index:
+Sesión de Feedback 03 en proceso.
