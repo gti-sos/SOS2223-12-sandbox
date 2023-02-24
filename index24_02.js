@@ -1,4 +1,4 @@
-//VIERNES 24 DE FEBRERO:
+// VIERNES 24 DE FEBRERO:
 // crear rama -> git checkout -b "nombre"
 // crear nuevo paquete/modulo -> npm (NO HACE FALTA HACER ESTE -> CON HACER EL DE ABAJO YA VALE)
 // inicializar en una carpeta -> npm init (0,0,0), despues pegar la url del repositorio, 

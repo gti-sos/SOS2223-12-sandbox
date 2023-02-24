@@ -1,4 +1,4 @@
-//VIERNES 17 DE FEBRERO:
+// VIERNES 17 DE FEBRERO:
 // var a;
 var a = 1;
 
