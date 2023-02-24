@@ -1,4 +1,4 @@
-
+//VIERNES 17 DE FEBRERO:
 // var a;
 var a = 1;
 
@@ -64,7 +64,7 @@ numbers.filter((n) =>{
 }).forEach(log);
 
 /////////////////////////////////////////////////////////////////////////
-
+// Separar los métodos porque asi juntos no funcionan.
 numbers.filter((n) =>{
     return n > 2;
 }).map((n) =>{
