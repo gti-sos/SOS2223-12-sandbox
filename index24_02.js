@@ -11,9 +11,8 @@
 var cool = require("cool-ascii-faces");
 console.log(cool());
 
-//////////////////////////////////////////////////////////////////////////////////////
 var express = require("express");
-var port = 12345;
+var port = 12345; // var port = process.env.PORT || 12345;
 var app = express();
 
 app.get("/faces", (request, response) =>{
