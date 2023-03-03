@@ -8,9 +8,9 @@
 // instalar un paquete interesante: npm install cool-ascii-faces
 
 // Pruebas para subir los algoritmos al servidor.
-/*
+
 var express = require("express");
-var port = 12345;
+var port = process.env.PORT || 12345;
 var app = express();
 
 app.get("/samples/aml", (request, response) =>{
@@ -147,14 +147,15 @@ app.get("/samples/aml", (request, response) =>{
     
         return temp / filtro.length;
     }
-    response.send(mediaFiltrada("Sevilla", lista2));
+    response.send("La temperatura media en Sevilla en 10 dias es: ", mediaFiltrada("Sevilla", lista2));
     console.log("Resultado del algoritmo");
 });
 
 app.listen(port);
 console.log("Servidor funcionando...");
-*/
+
 // Las caritas bien hechas.
+/*
 var cool = require("cool-ascii-faces");
 console.log(cool());
 
@@ -169,3 +170,4 @@ app.get("/faces", (request, response) =>{
 
 app.listen(port);
 console.log("Servidor funcionando...");
+*/
