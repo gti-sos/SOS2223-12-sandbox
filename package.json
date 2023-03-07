@@ -1,0 +1,25 @@
+
+{
+  "dependencies": {
+    "cool-ascii-faces": "^1.3.4",
+    "express": "^4.18.2"
+  },
+  "name": "sos2223-12-sandbox",
+  "description": "Apuntes de las clases.",
+  "version": "0.0.0",
+  "main": "index24_02.js",
+  "scripts": {
+    "start": "node index24_02",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gti-sos/SOS2223-12-sandbox.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gti-sos/SOS2223-12-sandbox/issues"
+  },
+  "homepage": "https://github.com/gti-sos/SOS2223-12-sandbox#readme"
+}
