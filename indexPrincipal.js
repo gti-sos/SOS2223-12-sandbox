@@ -8,13 +8,6 @@
 // instalar un paquete interesante: npm install cool-ascii-faces
 
 // Pruebas para subir los algoritmos al servidor.
-// Lab5
-var express = require("express");
-var port = process.env.PORT || 12345;
-var app = express();
-
-// Lab6
-var bodyParser = require("body-parser");
 
 /* Funcion para F03.
 app.get("/samples/aml", (request, response) =>{
@@ -158,14 +151,18 @@ app.get("/samples/aml", (request, response) =>{
 app.listen(port);
 console.log("Servidor funcionando...");
 */
+// Lab5
+var express = require("express");
+var port = process.env.PORT || 12345;
+var app = express();
+
 
 // Variables para las caritas y módulos de nodejs
 var cool = require("cool-ascii-faces");
 console.log(cool());
 
-var express = require("express");
-var port = process.env.PORT || 12345; //var port = 12345; 
-var app = express();
+// Lab6
+var bodyParser = require("body-parser");
 
 // Inicio API Lab6
 app.use(bodyParser.json());
