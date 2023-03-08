@@ -15,7 +15,7 @@ var agroclimatic = [
     {
         province: "Sevilla",
         zone: "Los Palacios y Villafranca",
-        date: 04/07/2021,
+        date: "04/07/2021",
         maximun_temperature: 37.57,
         minimun_temperature: 18.77,
         medium_temperature: 27.57,
@@ -26,7 +26,7 @@ var agroclimatic = [
     {
         province: "Sevilla",
         zone: "Los Palacios y Villafranca",
-        date: 05/07/2021,
+        date: "05/07/2021",
         maximun_temperature: 36.42,
         minimun_temperature: 17.55,
         medium_temperature: 27.19,
@@ -49,11 +49,11 @@ app.post(BASE_API_URL+"/agroclimatic", (request,response) => {
     var newAgroclimatic = request.body;
     
     
-    console.log(`newAgroclimatic = ${JSON.stringify(newAgroclimatic, null, 9)}`);
+    console.log(`newAgroclimatic = ${JSON.stringify(newAgroclimatic, null, 2)}`);
        
     console.log("New POST to /newAgroclimatic");
     
-    contacts.push(newAgroclimatic);
+    agroclimatic.push(newAgroclimatic);
     
     response.sendStatus(201);
 });
