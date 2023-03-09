@@ -86,19 +86,39 @@ app.get(BASE_API_URL+"/agroclimatic/:country", (request,response) => {
 app.get(BASE_API_URL+"/agroclimatic/:country/:zona", (request,response) => {
     var country = request.params.country;
     var zona = request.params.zona;
+    console.log(agroclimatic);
     var filtro = agroclimatic.filter(x => x.province == country &&  x.zone == zona);
     response.json(filtro);
     console.log("New GET to /agroclimatic");
     response.sendStatus(200);
+    
 });
 
 // PUT sevilla
 app.put(BASE_API_URL+"/agroclimatic/:country/:zona", (request,response) => {
     var country = request.params.country;
     var zona = request.params.zona;
-    var filtro = agroclimatic.filter(x => x.province == country &&  x.zone == zona);
-    response.json(filtro);
+    var body = request.body;
+    agroclimatic = agroclimatic.map(x => {
+        if (x.province === country && x.zone===zona){
+            x.maximun_temperature = body.maximun_temperature;
+            x.minimun_temperature = body.minimun_temperature;
+            x.medium_temperature = body.medium_temperature;
+        }
+        return x;
+    })
+    
     console.log("New PUT to /agroclimatic");
+    response.sendStatus(200);
+});
+
+// DELETE sevilla
+app.delete(BASE_API_URL+"/agroclimatic/:country/:dia", (request,response) =>{
+    var country = request.params.country;
+    var dia = request.params.dia;
+    var filtro = agroclimatic.filter(x => x.province == country && x.date == dia);
+    agroclimatic.pop(filtro);
+    console.log("New DELETE to /agroclimatic");
     response.sendStatus(200);
 });
 
