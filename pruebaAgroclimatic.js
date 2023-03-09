@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 var agroclimatic = [
     {
         province: "Sevilla",
-        zone: "Los Palacios y Villafranca",
+        zone: "LosPalaciosyVillafranca",
         date: "04/07/2021",
         maximun_temperature: 37.57,
         minimun_temperature: 18.77,
@@ -25,7 +25,7 @@ var agroclimatic = [
     },
     {
         province: "Sevilla",
-        zone: "Los Palacios y Villafranca",
+        zone: "LosPalaciosyVillafranca",
         date: "05/07/2021",
         maximun_temperature: 36.42,
         minimun_temperature: 17.55,
@@ -39,15 +39,16 @@ var agroclimatic = [
 
 const BASE_API_URL = "/api/v1";
 
+// GET entero
 app.get(BASE_API_URL+"/agroclimatic", (request,response) => {
     response.json(agroclimatic);
     console.log("New GET to /agroclimatic");
+    response.sendStatus(200);
     });
     
-    
+// POST nuevo    
 app.post(BASE_API_URL+"/agroclimatic", (request,response) => {
     var newAgroclimatic = request.body;
-    
     
     console.log(`newAgroclimatic = ${JSON.stringify(newAgroclimatic, null, 2)}`);
        
@@ -58,6 +59,48 @@ app.post(BASE_API_URL+"/agroclimatic", (request,response) => {
     response.sendStatus(201);
 });
 
+// PUT
+app.put(BASE_API_URL+"/agroclimatic", (request,response) =>{
+    console.log("New PUT to /agroclimatic");
+    response.sendStatus(405);
+});
+
+// DELETE
+app.delete(BASE_API_URL+"/agroclimatic", (request,response) =>{
+    console.log("New DELETE to /agroclimatic");
+    agroclimatic = [];
+    response.sendStatus(200);
+});
+
+// GET sevilla
+app.get(BASE_API_URL+"/agroclimatic/:country", (request,response) => {
+    var country = request.params.country;
+    var filtro = agroclimatic.filter(x => x.province == country);
+    response.json(filtro);
+    console.log("New GET to /agroclimatic");
+    response.sendStatus(200);
+});
+
+
+// GET sevilla y zona
+app.get(BASE_API_URL+"/agroclimatic/:country/:zona", (request,response) => {
+    var country = request.params.country;
+    var zona = request.params.zona;
+    var filtro = agroclimatic.filter(x => x.province == country &&  x.zone == zona);
+    response.json(filtro);
+    console.log("New GET to /agroclimatic");
+    response.sendStatus(200);
+});
+
+// PUT sevilla
+app.put(BASE_API_URL+"/agroclimatic/:country/:zona", (request,response) => {
+    var country = request.params.country;
+    var zona = request.params.zona;
+    var filtro = agroclimatic.filter(x => x.province == country &&  x.zone == zona);
+    response.json(filtro);
+    console.log("New PUT to /agroclimatic");
+    response.sendStatus(200);
+});
 
 // Caritas Lab5
 app.get("/faces", (request, response) =>{
