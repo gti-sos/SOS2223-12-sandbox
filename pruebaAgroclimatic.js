@@ -38,15 +38,16 @@ var agroclimatic = [
 
 
 const BASE_API_URL = "/api/v1";
-
-// GET entero
+// https://www.golinuxcloud.com/cannot-set-headers-after-they-are-sent-to-client/
+// se pone status para que no salgan errores de headers.
+// GET entero HECHO
 app.get(BASE_API_URL+"/agroclimatic", (request,response) => {
     response.json(agroclimatic);
     console.log("New GET to /agroclimatic");
-    response.sendStatus(200);
+    response.status(200);
     });
     
-// POST nuevo    
+// POST nuevo HECHO
 app.post(BASE_API_URL+"/agroclimatic", (request,response) => {
     var newAgroclimatic = request.body;
     
@@ -59,42 +60,57 @@ app.post(BASE_API_URL+"/agroclimatic", (request,response) => {
     response.sendStatus(201);
 });
 
-// PUT
+// PUT HECHO
 app.put(BASE_API_URL+"/agroclimatic", (request,response) =>{
     console.log("New PUT to /agroclimatic");
     response.sendStatus(405);
 });
 
-// DELETE
+// DELETE DUDA
 app.delete(BASE_API_URL+"/agroclimatic", (request,response) =>{
     console.log("New DELETE to /agroclimatic");
     agroclimatic = [];
     response.sendStatus(200);
 });
 
-// GET sevilla
+// GET sevilla HECHO
 app.get(BASE_API_URL+"/agroclimatic/:country", (request,response) => {
     var country = request.params.country;
     var filtro = agroclimatic.filter(x => x.province == country);
     response.json(filtro);
-    console.log("New GET to /agroclimatic");
-    response.sendStatus(200);
+    console.log("New GET to /agroclimatic/Sevilla");
+    response.status(200);
 });
 
-
-// GET sevilla y zona
+// POST sevilla HECHO
+app.post(BASE_API_URL+"/agroclimatic/:country", (request,response) =>{
+    console.log("New POST to /agroclimatic/Sevilla");
+    response.sendStatus(405);
+});
+/*
+// POST con los datos igual que otro MAL
+app.post(BASE_API_URL+"/agroclimatic/:country", (request,response) =>{
+    var country = request.params.country;
+    var filtro = agroclimatic.filter(x => x.province == country);
+    if(filtro in agroclimatic)
+    response.sendStatus(409);
+    
+    console.log("New POST to /agroclimatic/datos_iguales");    
+});
+*/
+// GET sevilla y zona HECHO
 app.get(BASE_API_URL+"/agroclimatic/:country/:zona", (request,response) => {
     var country = request.params.country;
     var zona = request.params.zona;
     console.log(agroclimatic);
     var filtro = agroclimatic.filter(x => x.province == country &&  x.zone == zona);
     response.json(filtro);
-    console.log("New GET to /agroclimatic");
-    response.sendStatus(200);
+    console.log("New GET to /agroclimatic/Sevilla/LosPalaciosyVillafranca");
+    response.status(200);
     
 });
 
-// PUT sevilla
+// PUT sevilla HECHO
 app.put(BASE_API_URL+"/agroclimatic/:country/:zona", (request,response) => {
     var country = request.params.country;
     var zona = request.params.zona;
@@ -108,17 +124,16 @@ app.put(BASE_API_URL+"/agroclimatic/:country/:zona", (request,response) => {
         return x;
     })
     
-    console.log("New PUT to /agroclimatic");
+    console.log("New PUT to /agroclimatic/Sevilla/LosPalaciosyVillafranca");
     response.sendStatus(200);
 });
 
-// DELETE sevilla
-app.delete(BASE_API_URL+"/agroclimatic/:country/:dia", (request,response) =>{
+// DELETE sevilla MAL
+app.delete(BASE_API_URL+"/agroclimatic/:country", (request,response) =>{
     var country = request.params.country;
-    var dia = request.params.dia;
-    var filtro = agroclimatic.filter(x => x.province == country && x.date == dia);
+    var filtro = agroclimatic.filter(x => x.province == country);
     agroclimatic.pop(filtro);
-    console.log("New DELETE to /agroclimatic");
+    console.log("New DELETE to /agroclimatic/Sevilla");
     response.sendStatus(200);
 });
 
