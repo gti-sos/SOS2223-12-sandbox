@@ -164,6 +164,13 @@ console.log(cool());
 // Lab6
 var bodyParser = require("body-parser");
 
+// Lab7
+app.use("/", express.static("./public"));
+var backend = require("./backend");
+
+backend(app);
+
+
 // Inicio API Lab6
 app.use(bodyParser.json());
 

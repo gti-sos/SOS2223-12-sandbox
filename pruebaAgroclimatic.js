@@ -82,6 +82,16 @@ app.get(BASE_API_URL+"/agroclimatic/:country", (request,response) => {
     response.status(200);
 });
 
+// GET estadistica concreta
+app.get(BASE_API_URL+"/agroclimatic/:country?medium_temperature=27.19", (request,response) => {
+    var country = request.params.country;
+    var m_t = request.params.medium_temperature;
+    var filtro = agroclimatic.filter(x => x.province == country && x.medium_temperature == m_t);
+    response.json(filtro);
+    console.log("New GET to /agroclimatic/Sevilla?medium_temperature=27.19");
+    response.status(200);
+});
+
 // POST sevilla HECHO
 app.post(BASE_API_URL+"/agroclimatic/:country", (request,response) =>{
     console.log("New POST to /agroclimatic/Sevilla");
