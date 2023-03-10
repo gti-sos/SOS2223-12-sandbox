@@ -14,25 +14,17 @@ app.use(bodyParser.json());
 var agroclimatic = [
     {
         province: "Sevilla",
-        zone: "LosPalaciosyVillafranca",
-        date: "04/07/2021",
+        year: 2021,
         maximun_temperature: 37.57,
         minimun_temperature: 18.77,
         medium_temperature: 27.57,
-        maximun_humidity: 80.3,
-        minimun_humidity: 21.45,
-        medium_humidity: 52.3
     },
     {
-        province: "Sevilla",
-        zone: "LosPalaciosyVillafranca",
-        date: "05/07/2021",
+        province: "Huelva",
+        date: 2020,
         maximun_temperature: 36.42,
         minimun_temperature: 17.55,
         medium_temperature: 27.19,
-        maximun_humidity: 87.8,
-        minimun_humidity: 25.9,
-        medium_humidity: 53.55
     }
 ];
 
@@ -41,13 +33,31 @@ const BASE_API_URL = "/api/v1";
 // https://www.golinuxcloud.com/cannot-set-headers-after-they-are-sent-to-client/
 // se pone status para que no salgan errores de headers.
 // GET entero HECHO
+/*
 app.get(BASE_API_URL+"/agroclimatic", (request,response) => {
     response.json(agroclimatic);
     console.log("New GET to /agroclimatic");
     response.status(200);
     });
+*/ 
+// GET entero verson Pablo
+app.get(BASE_API_URL+"/agroclimatic", (request,response) => {
+    console.log("New GET to /agroclimatic");
+    borrado.find({}, (err, agroclimatic)=>{
+        if(err){
+            console.log(`Error geting /agroclimatic: ${err}`);
+            response.sendStatus(500);
+        }else{
+            console.log(`Agroclimatic returned ${agroclimatic.length}`);
+            response.json(agroclimatic.map((c)=>{
+                delete c._id;
+                return c;
+            }));  
+        }
+    });
     
-// POST nuevo HECHO
+});
+// POST nuevo HECHO version pablo
 app.post(BASE_API_URL+"/agroclimatic", (request,response) => {
     var newAgroclimatic = request.body;
     
@@ -55,7 +65,7 @@ app.post(BASE_API_URL+"/agroclimatic", (request,response) => {
        
     console.log("New POST to /newAgroclimatic");
     
-    agroclimatic.push(newAgroclimatic);
+    borrado.insert(newAgroclimatic);
     
     response.sendStatus(201);
 });
@@ -83,7 +93,7 @@ app.get(BASE_API_URL+"/agroclimatic/:country", (request,response) => {
 });
 
 // GET estadistica concreta
-app.get(BASE_API_URL+"/agroclimatic/:country?medium_temperature=27.19", (request,response) => {
+app.get(BASE_API_URL+"/agroclimatic/:country?year=2021", (request,response) => {
     var country = request.params.country;
     var m_t = request.params.medium_temperature;
     var filtro = agroclimatic.filter(x => x.province == country && x.medium_temperature == m_t);
@@ -108,7 +118,7 @@ app.post(BASE_API_URL+"/agroclimatic/:country", (request,response) =>{
     console.log("New POST to /agroclimatic/datos_iguales");    
 });
 */
-// GET sevilla y zona HECHO
+// GET sevilla y zona HECHO -> NO HACE FALTA
 app.get(BASE_API_URL+"/agroclimatic/:country/:zona", (request,response) => {
     var country = request.params.country;
     var zona = request.params.zona;
@@ -120,13 +130,13 @@ app.get(BASE_API_URL+"/agroclimatic/:country/:zona", (request,response) => {
     
 });
 
-// PUT sevilla HECHO
-app.put(BASE_API_URL+"/agroclimatic/:country/:zona", (request,response) => {
+// PUT sevilla HECHO no va con version de pablo
+app.put(BASE_API_URL+"/agroclimatic/:country", (request,response) => {
     var country = request.params.country;
-    var zona = request.params.zona;
     var body = request.body;
     agroclimatic = agroclimatic.map(x => {
-        if (x.province === country && x.zone===zona){
+        if (x.province === country){
+            x.year = body.year;
             x.maximun_temperature = body.maximun_temperature;
             x.minimun_temperature = body.minimun_temperature;
             x.medium_temperature = body.medium_temperature;
@@ -134,17 +144,28 @@ app.put(BASE_API_URL+"/agroclimatic/:country/:zona", (request,response) => {
         return x;
     })
     
-    console.log("New PUT to /agroclimatic/Sevilla/LosPalaciosyVillafranca");
+    console.log("New PUT to /agroclimatic/Sevilla");
     response.sendStatus(200);
 });
 
 // DELETE sevilla MAL
-app.delete(BASE_API_URL+"/agroclimatic/:country", (request,response) =>{
-    var country = request.params.country;
-    var filtro = agroclimatic.filter(x => x.province == country);
-    agroclimatic.pop(filtro);
-    console.log("New DELETE to /agroclimatic/Sevilla");
-    response.sendStatus(200);
+var Datastore = require('nedb');
+var borrado = new Datastore();
+
+borrado.insert(agroclimatic);
+app.delete(BASE_API_URL+"/agroclimatic/:province", (request,response) =>{
+    var province = request.params.province; 
+    console.log("New DELETE to /agroclimatic");
+
+    borrado.remove({"province" : province}, {},(err, numRemoved)=>{
+        if(err){
+            console.log("Error para borrar el dato");
+            response.sendStatus(500);
+        }else{
+            console.log("Borrado dato");
+            response.json(200);
+        }
+    });
 });
 
 // Caritas Lab5

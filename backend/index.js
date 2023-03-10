@@ -59,7 +59,6 @@ module.exports = (app) =>{
                 response.json(200);
             }
         });
-        response.json(contacts);
     });
 };
 
