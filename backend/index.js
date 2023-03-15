@@ -1,6 +1,10 @@
+var Datastore = require("nedb");
+var db = new Datastore();
+
 const BASE_API_URL = "/api/v1";
 
 module.exports = (app) =>{
+
     var contacts = [
         {
             name : "pepa",
@@ -29,13 +33,12 @@ module.exports = (app) =>{
                 }));
             }
         });
-        response.json(contacts);
     });
         
         
     app.post(BASE_API_URL+"/contacts", (request,response) => {
         var newContact = request.body;        
-        
+        //db.find({province : newAgroclimatic.province}) si existe no puede hacer el post, sino si lo hace
         console.log(`newContact = ${JSON.stringify(newContact, null, 2)}`);
            
         console.log("New POST to /contacts");

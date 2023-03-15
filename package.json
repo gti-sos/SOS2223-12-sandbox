@@ -10,8 +10,8 @@
   "version": "0.0.0",
   "main": "index24_02.js",
   "scripts": {
-    "start": "node pruebaAgroclimatic",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node indexPrincipal",
+    "test": "npx newman run ./tests/backend.json -e ./tests/env/localhost.json"
   },
   "repository": {
     "type": "git",
