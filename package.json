@@ -10,7 +10,7 @@
   "version": "0.0.0",
   "main": "index24_02.js",
   "scripts": {
-    "start": "node indexPrincipal",
+    "start": "node pruebaAgroclimatic",
     "test": "npx newman run ./tests/backend.json -e ./tests/env/localhost.json"
   },
   "repository": {
