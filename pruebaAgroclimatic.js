@@ -6,24 +6,26 @@ console.log(cool());
 // Lab6
 var bodyParser = require("body-parser");
 
-var backendA = require("./backendA");
+var backendA = require('./backendA/index-aml');
 
 var app = express();
 var port = process.env.PORT || 12345;
 
+// Inicio API Lab6
+app.use(bodyParser.json());
+
+//const BASE_API_URL = "/api/v1";
 
 // Lab7
 app.use("/",express.static("./publicAgroclimatic"));
 
-// Inicio API Lab6
-app.use(bodyParser.json());
+
 
 //Lab7
 backendA(app);
 
 //var agroclimatic = [];
 
-//const BASE_API_URL = "/api/v1";
 /*
 app.get(BASE_API_URL+"/agroclimatic/loadInitialData", (req, res) => {
     if (agroclimatic.length == 0) {
